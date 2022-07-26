@@ -24,8 +24,8 @@ module.exports = {
     connection: {
       host: Env.get('DB_HOST', '127.0.0.1'),
       port: Env.get('DB_PORT', '27017' ),
-      username: Env.get('DB_USER', 'myUserAdmin'),
-      password: Env.get('DB_PASSWORD', 'myUserAdmin'),
+      username: Env.get('DB_USER', ''),
+      password: Env.get('DB_PASSWORD', ''),
       database: Env.get('DB_DATABASE', 'mydb'),
       options: {
         ssl: Env.get('DB_SSL', 'false'),
