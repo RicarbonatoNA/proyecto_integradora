@@ -46,7 +46,7 @@ class QueseriaController {
         const quese = await queseria.find(id);
         AutorizacionService.verificarPermiso(quese, user);
         quese.merge(request.only('nombre_queseria', 'telefono', 'direccion', 'horarios'));
-        await queseria.save();
+        await quese.save();
         return quese;
 
     }
