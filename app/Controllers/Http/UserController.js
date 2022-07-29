@@ -1,5 +1,6 @@
 'use strict'
 const User = use('App/Models/User')
+const { validateAll, validate } = use ('Validator')
 
 class UserController {
     async register({ request, auth, response }) {
@@ -15,6 +16,19 @@ class UserController {
                     message: 'User already registered'
                 })
             }
+
+            //Validaciones
+            const validation = await validate(request.all(), {
+            'email': 'required|min:3|max:100',
+            'password': 'required|min:3|max:1000',
+            'fname': 'required|min:3|max:100',
+            'lname': 'required|min:3|max:100'
+            })
+            
+            if(validation.fails()){
+                return validation.messages();
+            }
+
             let user = new User()
             user.email = email
             user.password = password
@@ -27,6 +41,7 @@ class UserController {
                 success: success,
                 UserID: user['_id']
             })
+            
         } catch (error) {
             console.log(error.message)
             response.status(403).json({
@@ -34,6 +49,7 @@ class UserController {
                 debug_error: error.message,
             })
         }
+
     }
     
     async login({ request, auth, response }) {
@@ -69,7 +85,6 @@ class UserController {
     }
     async profile({auth}){
         return await auth.getUser();
-
     }
 
 }
