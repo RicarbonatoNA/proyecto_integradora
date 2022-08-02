@@ -51,6 +51,7 @@ class UserController {
         }
 
     }
+    //prueba
     
     async login({ request, auth, response }) {
         const { email, password } = request.all()
