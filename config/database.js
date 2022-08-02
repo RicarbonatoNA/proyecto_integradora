@@ -20,7 +20,7 @@ module.exports = {
 
   mongodb: {
     client: 'mongodb',
-    connectionString: Env.get('DB_CONNECTION_STRING', ''),
+    connectionString: Env.get('DB_CONNECTION_STRING'),
     connection: {
       host: Env.get('DB_HOST', '127.0.0.1'),
       port: Env.get('DB_PORT', '27017' ),
@@ -30,7 +30,7 @@ module.exports = {
       options: {
         ssl: Env.get('DB_SSL', 'false'),
         readPreference: Env.get('DB_READ_PREFERENCE', 'primary'),
-        authSource: Env.get('DB_AUTH_SOURCE','admin')
+        authSource: Env.get('DB_AUTH_SOURCE','admin'),
       }
     }
   },

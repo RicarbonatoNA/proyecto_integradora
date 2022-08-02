@@ -73,9 +73,13 @@ class QueseriaController {
         quese.merge(request.only('nombre_queseria', 'telefono', 'direccion', 'horarios'));
         await quese.save();
         return quese;
-
     }
 
+    async Queseria({params}){
+        const {id} = params;
+        const quese = await queseria.find(id);
+        return quese
+    }
 }
 
 module.exports = QueseriaController

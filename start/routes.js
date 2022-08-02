@@ -31,12 +31,16 @@ Route.group(() => {
   Route.post('queseria/create', 'QueseriaController.create').middleware('auth');
   Route.delete('queseria/delete/:_id', 'QueseriaController.destroy').middleware('auth');
   Route.patch('queseria/update/:id', 'QueseriaController.update').middleware('auth');
+  Route.get('queseria/Queseria/:id', 'QueseriaController.Queseria').middleware('auth');
 
 // rutas apartados
   Route.get('apartados/:_id/get', 'ApartadoController.get').middleware('auth');
   Route.post('apartados/:_id/create', 'ApartadoController.create').middleware('auth');
 
-
+//rutas sensores
+  Route.post('sensores/:_id/create', 'SensorController.create').middleware('auth');
+  Route.get('sensores/:_id/get', 'SensorController.get').middleware('auth');
+  Route.delete('sensores/:_id/destroy', 'SensorController.destroy').middleware('auth');
 
 }).prefix('api/v1/')
 
