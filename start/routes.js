@@ -38,9 +38,11 @@ Route.group(() => {
   Route.post('apartados/:_id/create', 'ApartadoController.create').middleware('auth');
 
 //rutas sensores
-  Route.post('sensores/:_id/create', 'SensorController.create').middleware('auth');
-  Route.get('sensores/:_id/get', 'SensorController.get').middleware('auth');
-  Route.delete('sensores/:_id/destroy', 'SensorController.destroy').middleware('auth');
+Route.post('sensores/create', 'SensorController.create').middleware('auth');
+Route.get('sensores/get', 'SensorController.get').middleware('auth');
+Route.delete('sensores/:_id/destroy', 'SensorController.destroy').middleware('auth');
+Route.put('sensores/:_id/update', 'SensorController.update').middleware('auth');
+Route.get('sensores/:_id/get', 'SensorController.DatosSensor').middleware('auth');
 
 }).prefix('api/v1/')
 

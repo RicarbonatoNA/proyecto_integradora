@@ -4,9 +4,7 @@
 const Model = use('Model')
 
 class Sensor extends Model {
-    apartado(){
-        return this.belongsTo('App/Models/Apartado')
-    }
+    
 }
 
 module.exports = Sensor
