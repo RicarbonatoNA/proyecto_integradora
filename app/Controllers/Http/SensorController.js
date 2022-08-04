@@ -17,7 +17,7 @@ class SensorController {
         const descripcion = request.input('descripcion')
         const values = request.input('values');
         const imagen = request.input('imagen')
-        console.log("request:", request.all())
+        //console.log("request:", request.all())
         let Sen = new Sensor()
         Sen.nombre_sensor = nombre_sensor
         Sen.tipo = tipo
@@ -26,7 +26,7 @@ class SensorController {
         Sen.values= values
         Sen.imagen = imagen
         let success = await Sen.save()
-        console.log("send:", Sen)
+        //console.log("send:", Sen)
         return response.status(200).json({
             status:'ok',
             success: success,
