@@ -64,6 +64,7 @@ class SensorController {
             'nombre_sensor',
             'tipo',
             'pines',
+            'values',
             'descripcion',
             'imagen'
         ]));
