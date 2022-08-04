@@ -30,7 +30,8 @@ class SensorController {
         return response.status(200).json({
             status:'ok',
             success: success,
-            message:'Exito!! sensor Registrado'
+            //message:'Exito!! sensor Registrado'
+        message: [request.all(), Sen]
         });
         }catch(error){
             response.status(403).json({
