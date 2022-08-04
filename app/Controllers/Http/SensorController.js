@@ -36,7 +36,8 @@ class SensorController {
         }catch(error){
             response.status(403).json({
                 status:'error',
-                message: error.message
+                //message: error.message
+                message: [request.all(), Sen, error.message]
             });
         }
     }
