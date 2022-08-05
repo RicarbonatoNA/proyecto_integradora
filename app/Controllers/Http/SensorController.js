@@ -1,6 +1,7 @@
 'use strict'
 const Apartado = use('App/Models/Apartado');
 const Sensor = use('App/Models/Sensor');
+const { validateAll, validate } = use ('Validator')
 
 class SensorController {
     async get(){
@@ -21,23 +22,39 @@ class SensorController {
         let Sen = new Sensor()
         Sen.nombre_sensor = nombre_sensor
         Sen.tipo = tipo
-        Sen.pines = pines
+        Sen.pines = Number(pines)
         Sen.descripcion = descripcion
-        Sen.values= values
+        Sen.values= Number(values)
         Sen.imagen = imagen
         let success = await Sen.save()
         //console.log("send:", Sen)
+
+        //Validaciones
+        const validation = await validate(request.all(), {
+            'nombre_sensor': 'required|min:3|max:100',
+            'tipo': 'required|min:3|max:1000',
+            'pines': 'required|min:1|max:100',
+            'descripcion': 'required|min:3|max:100',
+            'values': 'required|min:1|max:100',
+            'imagen': 'required|min:1|max:100'
+        })
+
+            if(validation.fails()){
+                return validation.messages();
+            }
+
         return response.status(200).json({
             status:'ok',
             success: success,
-            //message:'Exito!! sensor Registrado'
-        message: [request.all(), Sen]
+            message:'Exito!! sensor Registrado'
+            //message: [request.all(), Sen]
         });
+
         }catch(error){
             response.status(403).json({
                 status:'error',
-                //message: error.message
-                message: [request.all(), Sen, error.message]
+                message: error.message
+                //message: [request.all(), Sen, error.message]
             });
         }
     }
@@ -51,6 +68,7 @@ class SensorController {
             status:'ok',
             message:'Sensor '+ sen.nombre_sensor + ' Eliminado !!'
         });
+
         }catch(error){
             response.status(403).json({
                 status:'error',
