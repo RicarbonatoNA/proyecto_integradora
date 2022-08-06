@@ -22,9 +22,9 @@ class SensorController {
         let Sen = new Sensor()
         Sen.nombre_sensor = nombre_sensor
         Sen.tipo = tipo
-        Sen.pines = Number(pines)
+        Sen.pines = pines
         Sen.descripcion = descripcion
-        Sen.values= Number(values)
+        Sen.values= values
         Sen.imagen = imagen
         let success = await Sen.save()
         //console.log("send:", Sen)
