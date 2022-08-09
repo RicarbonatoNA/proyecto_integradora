@@ -44,6 +44,10 @@ Route.group(() => {
   Route.put('sensores/:_id/update', 'SensorController.update').middleware('auth');
   Route.get('sensores/:_id/get', 'SensorController.DatoSensor').middleware('auth');
 
+  //rutas values
+  Route.post('values/:_id/create', 'ValueController.Create').middleware('auth');
+  Route.get('values/:_id/get', 'ValueController.get').middleware('auth');
+
 }).prefix('api/v1/')
 
 Route.resource('users', 'UserController')

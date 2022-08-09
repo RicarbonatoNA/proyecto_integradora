@@ -7,6 +7,9 @@ class Sensor extends Model {
     Apartado(){
         return this.belongsTo('App/Models/Apartado')
     }
+    Values(){
+        return this.hasMany('App/Models/Value')
+    }
 }
 
 module.exports = Sensor

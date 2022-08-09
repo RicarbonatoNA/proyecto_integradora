@@ -19,7 +19,6 @@ class SensorController {
         const {tipo} = request.all();
         const {pines} = request.all();
         const {descripcion} = request.all();
-        const values= []
         const {imagen} = request.all();
         const {_id} = params;
         
@@ -32,7 +31,6 @@ class SensorController {
         Sen.tipo = tipo
         Sen.pines = pines
         Sen.descripcion = descripcion
-        Sen.values= values
         Sen.imagen = imagen
         console.log(request.all())
         
@@ -76,8 +74,7 @@ class SensorController {
         sen.merge(request.only([
             'nombre_sensor',
             'tipo',
-            'pines',
-            'values',
+            'pines',,
             'descripcion',
             'imagen'
         ]));
