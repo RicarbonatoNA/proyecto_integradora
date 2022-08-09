@@ -8,6 +8,10 @@ class Apartado extends Model {
     Queseria(){
         return this.belongsTo('App/Models/Queseria')
     }
+
+    Sensores(){
+        return this.hasMany('App/Models/Sensor')
+    }
 }
 
 module.exports = Apartado

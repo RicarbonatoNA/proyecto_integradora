@@ -4,57 +4,50 @@ const Sensor = use('App/Models/Sensor');
 const { validateAll, validate } = use ('Validator')
 
 class SensorController {
-    async get(){
-        const sensores = await Sensor.all()
-        return sensores
+    async get({params}){
+
+        const {_id}= params;
+        const apart = await Apartado.find(_id)
+        return await apart.Sensores().fetch()
     }
 
-    async create({request,response}){
+    async create({request,response, params}){
         
         try{
-        const nombre_sensor = request.input('nombre_sensor');
-        const tipo = request.input('tipo');
-        const pines = request.input('pines')
-        const descripcion = request.input('descripcion')
-        const values = request.input('values');
-        const imagen = request.input('imagen')
-        //console.log("request:", request.all())
+        
+        const {nombre_sensor} = request.all()
+        const {tipo} = request.all();
+        const {pines} = request.all();
+        const {descripcion} = request.all();
+        const values= []
+        const {imagen} = request.all();
+        const {_id} = params;
+        
+        const apar = await Apartado.find(_id)
+
+        console.log("request: ",request.all())
         let Sen = new Sensor()
+
         Sen.nombre_sensor = nombre_sensor
         Sen.tipo = tipo
         Sen.pines = pines
         Sen.descripcion = descripcion
         Sen.values= values
         Sen.imagen = imagen
-        let success = await Sen.save()
-        //console.log("send:", Sen)
-
-        //Validaciones
-        const validation = await validate(request.all(), {
-            'nombre_sensor': 'required|min:3|max:100',
-            'tipo': 'required|min:3|max:1000',
-            'pines': 'required|min:1|max:100',
-            'descripcion': 'required|min:3|max:100',
-            'values': 'required|min:1|max:100',
-            'imagen': 'required|min:1|max:100'
-        })
-
-            if(validation.fails()){
-                return validation.messages();
-            }
-
+        console.log(request.all())
+        
+        let success = await apar.Sensores().save(Sen)
+        console.log("Sen: ",Sen)
         return response.status(200).json({
             status:'ok',
             success: success,
-            message:'Exito!! sensor Registrado'
-            //message: [request.all(), Sen]
-        });
+            message: 'Se a creado con exito!'
 
+        });
         }catch(error){
             response.status(403).json({
                 status:'error',
                 message: error.message
-                //message: [request.all(), Sen, error.message]
             });
         }
     }
@@ -68,11 +61,10 @@ class SensorController {
             status:'ok',
             message:'Sensor '+ sen.nombre_sensor + ' Eliminado !!'
         });
-
         }catch(error){
             response.status(403).json({
                 status:'error',
-                message:'Valio Queso!! No se pudo Eliminar'
+                message:error.message
             });
         }
     }
@@ -105,7 +97,6 @@ class SensorController {
         try {
         const {_id}= params;
         const sen = await Sensor.find(_id);
-
         return sen
 
         }catch(error){
