@@ -87,6 +87,21 @@ class UserController {
         return await auth.getUser();
     }
 
+    async update({auth, request, response}){
+        try{
+            const user = await auth.getUser();
+        user.merge(request.only(['email', 'fname', 'lname']));
+        await user.save(user)
+        return response.json({
+            message: 'Exito!! Usuario Actualizado',
+        });
+        }catch(error){
+            response.json({
+                message: error.message
+            });
+        }
+    }
+
 }
 
 module.exports = UserController

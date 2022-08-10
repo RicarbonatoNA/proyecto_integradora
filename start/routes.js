@@ -26,6 +26,8 @@ Route.group(() => {
   Route.post('/users/login', 'UserController.login')
   Route.get('/users/list', 'UserController.list')
   Route.get('/users/user', 'UserController.profile' )
+  Route.put('/users/update', 'UserController.update' )
+  
 //rutas queseria
   Route.get('queseria/index', 'QueseriaController.index').middleware('auth');
   Route.post('queseria/create', 'QueseriaController.create').middleware('auth');
@@ -36,6 +38,7 @@ Route.group(() => {
 //rutas apartados
   Route.get('apartados/:_id/get', 'ApartadoController.get').middleware('auth');
   Route.post('apartados/:_id/create', 'ApartadoController.create').middleware('auth');
+  Route.delete('apartados/:_id/destroy', 'ApartadoController.destroy').middleware('auth');
 
 //rutas sensores
   Route.post('sensores/:_id/create', 'SensorController.create').middleware('auth');

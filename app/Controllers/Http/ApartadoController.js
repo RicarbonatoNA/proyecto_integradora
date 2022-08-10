@@ -29,6 +29,13 @@ class ApartadoController {
         await Queso.apartados().save(A)
         return A
     }
+
+    async destroy({params}){
+        const {_id}= params;
+        const apar = await Apartado.find(_id)
+        await apar.delete();
+        return apar
+    }
 }
 
 module.exports = ApartadoController
