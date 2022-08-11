@@ -64,16 +64,23 @@ class QueseriaController {
         return quese;
     }
 
-    async update({auth, params, request}){
-        const user = await auth.getUser();
-        const {id} = params;
+    async update({auth, params, request,response}){
+        try{
+            const user = await auth.getUser();
+            const {id} = params;
+            const quese = await queseria.find(id);
+            AutorizacionService.verificarPermiso(quese);
+            quese.merge(request.only(['nombre_queseria', 'telefono', 'direccion', 'horarios', 'descripcion']));
+            await user.queserias().save(quese);
+            return response.json({
+                message:"Exito!! Queseria Actualizada"
+            });
+        }catch(error){
+            message: error.message
 
-        const quese = await queseria.find(id);
-        AutorizacionService.verificarPermiso(quese, user);
-        quese.merge(request.only('nombre_queseria', 'telefono', 'direccion', 'horarios'));
-        await quese.save();
-        return quese;
+        }
     }
+
 
     async Queseria({params}){
         const {id} = params;
