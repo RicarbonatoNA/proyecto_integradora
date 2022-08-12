@@ -36,6 +36,23 @@ class ApartadoController {
         await apar.delete();
         return apar
     }
+
+    async update({ params, request,response}){
+        try {
+            const {_id} = params;
+            const apart = await Apartado.find(_id)
+            apart.merge(request.only([
+                'nombre_apartado',
+                'descripcion'
+            ]));
+            await apart.save(apart)
+            return response.json({
+                message: 'Exito!! '+  apart.nombre_apartado + ' Actualizado'
+            });
+        } catch(error){
+            message:error.message
+        }
+    }
 }
 
 module.exports = ApartadoController

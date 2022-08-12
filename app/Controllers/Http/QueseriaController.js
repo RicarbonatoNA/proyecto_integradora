@@ -75,9 +75,23 @@ class QueseriaController {
             return response.json({
                 message:"Exito!! Queseria Actualizada"
             });
+
         }catch(error){
             message: error.message
 
+        }
+
+        //Validaciones (NO FUNCIONA, RECUERDA REVISARLO)
+        const validation = await validate(request.all(), {
+            'nombre_queseria': 'required|min:3|max:100',
+            'telefono': 'required|min:7|max:10',
+            'direccion': 'required|min:3|max:100',
+            'horarios': 'required|min:3|max:100',
+            'descripcion': 'required|min:3|max:300'
+        })
+
+        if(validation.fails()){
+            return validation.messages();
         }
     }
 
