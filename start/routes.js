@@ -40,6 +40,7 @@ Route.group(() => {
   Route.post('apartados/:_id/create', 'ApartadoController.create').middleware('auth');
   Route.delete('apartados/:_id/destroy', 'ApartadoController.destroy').middleware('auth');
   Route.put('apartados/:_id/update', 'ApartadoController.update').middleware('auth');
+  Route.get('apartado/:_id/get', 'ApartadoController.apartado').middleware('auth');
 
 //rutas sensores
   Route.post('sensores/:_id/create', 'SensorController.create').middleware('auth');

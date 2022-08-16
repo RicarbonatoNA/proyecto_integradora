@@ -53,6 +53,12 @@ class ApartadoController {
             message:error.message
         }
     }
+
+    async apartado({}){
+        const {_id} = params;
+        const apart = await Apartado.find(_id)
+        return apart
+    }
 }
 
 module.exports = ApartadoController
