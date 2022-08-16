@@ -54,7 +54,7 @@ class ApartadoController {
         }
     }
 
-    async apartado({}){
+    async apartado({params}){
         const {_id} = params;
         const apart = await Apartado.find(_id)
         return apart
