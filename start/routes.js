@@ -47,7 +47,7 @@ Route.group(() => {
   Route.get('sensores/:_id/get', 'SensorController.get').middleware('auth');
   Route.delete('sensores/:_id/destroy', 'SensorController.destroy').middleware('auth');
   Route.put('sensores/:_id/update', 'SensorController.update').middleware('auth');
-  Route.get('sensor/:_id/get', 'SensorController.DatoSensor').middleware('auth');
+  Route.get('sensor/:_id/get', 'SensorController.DatosSensor').middleware('auth');
 
   //rutas values
   Route.post('values/:_id/create', 'ValueController.Create').middleware('auth');
